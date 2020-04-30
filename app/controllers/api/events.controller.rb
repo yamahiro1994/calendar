@@ -48,8 +48,8 @@ module Api
         event_params.require(:title)
         event_params.require(:start)
         event_params.require(:end)
-        # event_params.require(:color)
-        # event_params.require(:allday)
+        event_params.require(:color)
+        event_params.require(:allday)
         @event = Event.new(event_params)
         respond_to do |format|
           format.any

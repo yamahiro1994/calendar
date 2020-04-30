@@ -16,6 +16,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    render plain: render_to_string(partial: 'form_new', layout: false, locals: { event: @event })
   end
 
   def edit
@@ -25,7 +26,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
 
     respond_to do |format|
-      if @event.save
+      if @event.save!
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -55,18 +56,12 @@ class EventsController < ApplicationController
     end
   end
 
-  # private
-  #   def set_event
-  #     @event = Event.find(params[:id])
-  #   end
+  private
+    def set_event
+      @event = Event.find(params[:id])
+    end
 
-  #   def event_params
-  #     params.require(:event).permit(
-  #       :title,
-  #       :start,
-  #       :end,
-  #       :color,
-  #       :allday
-  #     )
-  #   end
+    def event_params
+      params.require(:event).permit(:title, :start, :end, :color, :allday)
+    end
 end
