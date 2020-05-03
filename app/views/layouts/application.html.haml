@@ -1,55 +1,17 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
     %title Calendar
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    %link{:href => "assets/fullcalendar/core/main.css", :rel => "stylesheet"}/
-    %link{:href => "assets/fullcalendar/daygrid/main.css", :rel => "stylesheet"}/
-    %link{:href => "https://use.fontawesome.com/releases/v5.0.6/css/all.css", :rel => "stylesheet"}/
-    %link{:href => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css", :rel => "stylesheet"}/
-    %link{:href => "assets/fullcalendar/bootstrap/main.css", :rel => "stylesheet"}/
-
-    %script{:src => "assets/fullcalendar/core/main.js"}
-    %script{:src => "assets/fullcalendar/daygrid/main.js"}
-    %script{:src => "assets/fullcalendar/interaction/main.js"}
-    %script{:src => "assets/fullcalendar/bootstrap/main.js"}
-
-  :javascript
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        plugins: [ 'dayGrid', 'timeGrid', 'list', 'bootstrap' ],
-        timeZone: 'ja',
-        themeSystem: 'bootstrap',
-        header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-        },
-        weekNumbers: true,
-        eventLimit: true, // allow "more" link when too many events
-        events: [
-          { // this object will be "parsed" into an Event Object
-            title: 'hahaha', // a property!
-            start: '2020-05-01', // a property!
-            end: '2020-05-02' // a property! ** see important note below about 'end' **
-          },
-          {
-            title: 'huhuhu',
-            start: '2020-05-20',
-            end: '2020-05-23'
-          }
-        ]
-      });
-
-      calendar.render();
-    });
-
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    -# %script{src: "assets/fullcalendar/core/main.js"}
+    -# %script{src: "assets/fullcalendar/daygrid/main.js"}
+    -# %script{src: "assets/fullcalendar/interaction/main.js"}
+    -# %script{src: "assets/fullcalendar/timegrid/main.js"}
+    -# %script{src: "assets/fullcalendar/list/main.js"}
   %body
     = render 'layouts/notifications'
     = yield

@@ -4,9 +4,11 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable,  :validatable
+
   validates :username, presence: true, uniqueness: true
 
   has_many :events
+
   def will_save_change_to_email?
     false
   end
