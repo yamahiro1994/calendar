@@ -1,0 +1,20 @@
+.align
+  .grid
+    #login
+      %h2
+        %span.fontawesome-lock>
+        認証
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        %fieldset
+          %p
+            %label{:for => "username"} 名前
+          %p
+          .field
+            = f.text_field :username, autocomplete: "name", class: "input_name", required: false
+          %p
+            %label{:for => "password"} パスワード
+          %p
+          .field
+            = f.password_field :password, autocomplete: "current-password", class: "input_password", required: false
+          %p
+          = f.submit "ログイン", class: 'login_btn'
