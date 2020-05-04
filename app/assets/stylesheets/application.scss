@@ -17,3 +17,21 @@
 @import "reset";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "fullcalendar/core/main.css";
+@import "fullcalendar/daygrid/main.css";
+@import "fullcalendar/list/main.css";
+@import "fullcalendar/timegrid/main.css";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
+
+* {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+body {
+  background-color: #f8f8f8;
+}
+.notification{
+  text-align: center;
+}

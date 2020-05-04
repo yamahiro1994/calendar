@@ -10,11 +10,34 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require moment
 //= require jquery
-//= require jquery_ujs
+//= require moment
+//= require rails-ujs
 //= require fullcalendar
 //= require fullcalendar/lang/ja
-//= require rails-ujs
 //= require activestorage
 //= require_tree.
+
+$(document).ready(function() {
+  var select = function(start, end, allDay) {
+    var title = window.prompt("title");
+    var data = {event: {title: title, start: start, end: end, color: color, allDay: allDay}};
+    $.ajax({
+        type: "POST",
+        url: '/events',
+        data: data,
+        success: function() {
+          calendar.fullCalendar('refetchEvents');
+        }
+    });
+    calendar.fullCalendar('unselect');
+  };
+
+  var calendar = $('#calendar').fullCalendar({
+    events: '/events.json',
+    selectable: true,
+    selectHelper: true,
+    ignoreTimezone: false,
+    select: select
+  });
+});
