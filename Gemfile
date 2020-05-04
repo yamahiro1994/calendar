@@ -41,6 +41,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
   gem 'better_errors'
+  gem 'sqlite3'
 end
 
 group :development do
@@ -70,3 +71,7 @@ gem 'jquery-ui-rails'
 gem 'momentjs-rails'
 gem 'font-awesome-sass'
 gem 'fullcalendar-rails'
+
+group :production do
+  gem 'pg'
+end

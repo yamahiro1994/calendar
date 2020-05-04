@@ -24,10 +24,10 @@ $(document).ready(function() {
     var data = {event: {title: title, start: start, end: end, color: color, allDay: allDay}};
     $.ajax({
         type: "POST",
-        url: '/myfeed.rails',
+        url: '/events',
         data: data,
         success: function() {
-            calendar.fullCalendar('refetchEvents');
+          calendar.fullCalendar('refetchEvents');
         }
     });
     calendar.fullCalendar('unselect');
