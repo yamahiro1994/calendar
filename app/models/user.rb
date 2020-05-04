@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
-  has_many :events
+  has_many :events, foreign_key: :user_id, dependent: :destroy
 
   def will_save_change_to_email?
     false
