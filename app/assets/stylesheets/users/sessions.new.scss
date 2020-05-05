@@ -10,7 +10,7 @@ $color-bg: #c0c0c0;
 /* ---------- GENERAL ---------- */
 
 body {
-  // color: $color;
+  color: $color;
   font-family: 'Varela Round', sans-serif;
   line-height: 1.5;
   margin: 0;
@@ -29,6 +29,7 @@ input {
 /* ---------- ALIGN ---------- */
 
 .align {
+  background-color: $color-bg;
   align-items: center;
   display: flex;
   flex-direction: column;

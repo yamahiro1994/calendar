@@ -2,7 +2,9 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy] #パラメータのidからレコードを特定するメソッド
 
   def index
-    @events = Event.all
+    @events = Event.all.includes(:user)
+    @user = User.find(current_user.id)
+    @events = Event.where(user_id: current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,63 +18,43 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    render plain: render_to_string(partial: 'form_new', layout: false, locals: { event: @event })
+    # render plain: render_to_string(partial: 'form_new', layout: false, locals: { event: @event })
+  end
+
+  def create
+    @event = Event.new(event_params)
+    if @event.save!
+      respond_to do |format|
+        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.json { render :show, status: :created, location: @event }
+      else
+        format.html { render :new }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit
   end
 
-  # def create
-  #   @event = Event.new(event_params)
-
-  #   respond_to do |format|
-  #     if @event.save!
-  #       format.html { redirect_to @event, notice: 'Event was successfully created.' }
-  #       format.json { render :show, status: :created, location: @event }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @event.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
-  # def update
-  #   respond_to do |format|
-  #     if @event.update(event_params)
-  #       format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-  #       format.json { render :show, status: :ok, location: @event }
-  #     else
-  #       format.html { render :edit }
-  #       format.json { render json: @event.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
-  # def destroy
-  #   @event.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
-
-  def create
-    event = Event.new(event_params)
-    event.save!
-    @events = Event.where(user_id: current_user.id)
-  end
-
   def update
-      event = Event.find(params[:id])
-      @events = Event.where(user_id: current_user.id)
-      event.update(event_params)
+    if @event.update(event_params)
+      respond_to do |format|
+        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.json { render :show, status: :ok, location: @event }
+      else
+        format.html { render :edit }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
-      @user = User.find(params[:id])
-      event = Event.find(params[:id])
-      event.destroy
-      # redirect_to user_path(@user)
+    @event.destroy
+    respond_to do |format|
+      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private

@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     # get "sign_out", to: "users/sessions#destroy"
     # delete "logout", :to => "users/sessions#destroy"
   # end
+  namespace :api, { format: 'json' } do
+    resources :events
+  end
 
   resources :events
   resources :users, only: [:edit, :update, :destroy]
