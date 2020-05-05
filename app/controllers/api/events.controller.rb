@@ -26,8 +26,8 @@ module Api
         event_params.require(:title)
         event_params.require(:start)
         event_params.require(:end)
-        # event_params.require(:color)
-        # event_params.require(:allday)
+        event_params.require(:color)
+        event_params.require(:allday)
         respond_to do |format|
           format.any
           if @event.update!(event_params)
@@ -41,6 +41,7 @@ module Api
 
       def new
         @event = Event.new
+        render plain: render_to_string(partial: 'form_new', layout: false, locals: { event: @event })
       end
 
       def create
@@ -68,14 +69,7 @@ module Api
 
       private
         def event_params
-          params[:event]
-          .permit(
-            :title,
-            :start,
-            :end,
-            :color,
-            :allday
-          )
+          params(:event).permit(:title, :start, :end, :color, :allday, :user_id)
         end
     end
   end
