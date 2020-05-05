@@ -6,71 +6,71 @@ module Api
     # CSRF対策
     protect_from_forgery except: [:create, :update]
 
-  def index
-    @events = Event.order(:id).limit(params[:limit]).offset(params[:offset])
-    json = @events
-    render json: json.to_json
-  end
+    def index
+      @events = Event.order(:id).limit(params[:limit]).offset(params[:offset])
+      json = @events
+      render json: json.to_json
+    end
 
-  def new
-    @event = Event.new
-    render plain: render_to_string(partial: 'form_new', layout: false, locals: { event: @event })
-  end
+    def new
+      @event = Event.new
+      render plain: render_to_string(partial: 'form_new', layout: false, locals: { event: @event })
+    end
 
-  def create
-    event_params.require(:title)
-    event_params.require(:start)
-    event_params.require(:end)
-    event_params.require(:color)
-    event_params.require(:allday)
-    @event = Event.new(event_params)
-    respond_to do |format|
-      format.any
-      if @event.save!
-        render json: @event
-      else
-        render json: {status: "ng", code: 500, content: {message: "エラー"}}
+    def create
+      event_params.require(:title)
+      event_params.require(:start)
+      event_params.require(:end)
+      event_params.require(:color)
+      event_params.require(:allday)
+      @event = Event.new(event_params)
+      respond_to do |format|
+        format.any
+        if @event.save!
+          render json: @event
+        else
+          render json: {status: "ng", code: 500, content: {message: "エラー"}}
+        end
       end
     end
-  end
 
-  def show
-    @event = Event.find(params[:id])
-    render json: @event.to_json
-  end
+    def show
+      @event = Event.find(params[:id])
+      render json: @event.to_json
+    end
 
-  def edit
-    @event = Event.find(params[:id])
-  end
+    def edit
+      @event = Event.find(params[:id])
+    end
 
-  def update
-    @event = Event.find(params[:id])
-    event_params.require(:title)
-    event_params.require(:start)
-    event_params.require(:end)
-    event_params.require(:color)
-    event_params.require(:allday)
-    respond_to do |format|
-      format.any
-      if @event.update!(event_params)
-        @event.save
-        render json: @event.to_json
-      else
-        render json: {status: "ng", code: 500, content: {message: "エラー"}}
+    def update
+      @event = Event.find(params[:id])
+      event_params.require(:title)
+      event_params.require(:start)
+      event_params.require(:end)
+      event_params.require(:color)
+      event_params.require(:allday)
+      respond_to do |format|
+        format.any
+        if @event.update!(event_params)
+          @event.save
+          render json: @event.to_json
+        else
+          render json: {status: "ng", code: 500, content: {message: "エラー"}}
+        end
       end
     end
+
+    def destroy
+      @event = Event.find(params[:id])
+      @event.destroy
+      render json: @event
+    end
+
+    private
+
+    def event_params
+      params(:event).permit(:title, :start, :end, :color, :allday, :user_id)
+    end
   end
-
-  def destroy
-    @event = Event.find(params[:id])
-    @event.destroy
-    render json: @event
-  end
-
-  private
-
-  def event_params
-    params(:event).permit(:title, :start, :end, :color, :allday, :user_id)
-  end
-
 end
