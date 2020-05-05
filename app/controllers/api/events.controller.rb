@@ -2,7 +2,7 @@ require "#{Rails.root}/app/controllers/application_controller.rb"
 
 module Api
   class EventsController < ApplicationController
-    load_and_authorize_resource
+    # load_and_authorize_resource
     # CSRF対策
     protect_from_forgery except: [:create, :update]
 
