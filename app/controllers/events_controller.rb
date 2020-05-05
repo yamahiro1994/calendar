@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy] #パラメータのidからレコードを特定するメソッド
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  #パラメータのidからレコードを特定する
 
   def index
     @events = Event.all.includes(:user)
@@ -13,12 +14,8 @@ class EventsController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def new
     @event = Event.new
-    # render plain: render_to_string(partial: 'form_new', layout: false, locals: { event: @event })
   end
 
   def create
@@ -32,6 +29,10 @@ class EventsController < ApplicationController
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+
+  def show
   end
 
   def edit
@@ -58,6 +59,7 @@ class EventsController < ApplicationController
   end
 
   private
+
     def set_event
       @event = Event.find(params[:id])
     end

@@ -811,9 +811,9 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 /* Toolbar
 --------------------------------------------------------------------------------------------------*/
 .fc-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
 }
 
 .fc-toolbar.fc-header-toolbar {
