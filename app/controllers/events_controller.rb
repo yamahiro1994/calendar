@@ -1,11 +1,14 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   #パラメータのidからレコードを特定する
+  protect_from_forgery with: :null_session
+
 
   def index
     @events = Event.all.includes(:user)
-    @user = User.find(current_user.id)
-    @events = Event.where(user_id: current_user.id)
+    # @user = User.find(current_user.id)
+    # @events = Event.where(user_id: current_user.id)
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,19 +17,16 @@ class EventsController < ApplicationController
     end
   end
 
-  def new
-    @event = Event.new
-  end
-
   def create
-    @event = Event.new(event_params)
-    if @event.save!
+    # binding.pry
+    @events = Event.new(event_params)
+    if @events.save!
       respond_to do |format|
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
+        format.html { redirect_to @events, notice: 'Event was successfully created.' }
+        format.json { render :show, status: :created, location: @events }
       else
         format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.json { render json: @events.errors, status: :unprocessable_entity }
       end
     end
   end
