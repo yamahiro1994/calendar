@@ -18,7 +18,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    # binding.pry
     @events = Event.new(event_params)
     if @events.save!
       respond_to do |format|
@@ -31,21 +30,29 @@ class EventsController < ApplicationController
     end
   end
 
-
   def show
+    @event = Event.find(params[:id])
+    render json: @event.to_json
   end
 
   def edit
+    @event = Event.find(params[:id])
   end
 
   def update
-    if @event.update(event_params)
-      respond_to do |format|
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-        format.json { render :show, status: :ok, location: @event }
+    @event = Event.find(params[:id])
+    event_params.require(:title)
+    event_params.require(:start)
+    event_params.require(:end)
+    # event_params.require(:color)
+    # event_params.require(:allday)
+    respond_to do |format|
+      format.any
+      if @event.update!(event_params)
+        @event.save
+        render json: @event.to_json
       else
-        format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        render json: {status: "ng", code: 500, content: {message: "エラーだよ"}}
       end
     end
   end
