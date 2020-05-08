@@ -6,6 +6,9 @@ $(document).ready(function() {
     var year = d.getYear() + 1900;
     var month = d.getMonth() + 1;
     var day   = d.getDate();
+    var year = moment(start).year();
+    var month = moment(start).month()+1; //1月が0のため+1する
+    var day = moment(start).date();
     var hour  = ( d.getHours()   < 10 ) ? '0' + d.getHours()   : d.getHours();
     var min   = ( d.getMinutes() < 10 ) ? '0' + d.getMinutes() : d.getMinutes();
     var moment_start = year+"-"+month+"-"+day+" "+hour+":"+min;
@@ -19,6 +22,9 @@ $(document).ready(function() {
     var min   = ( d.getMinutes() < 10 ) ? '0' + d.getMinutes() : d.getMinutes();
     var moment_end = year+"-"+month+"-"+day+" "+hour+":"+min;
     var end_time = moment(moment_end).add(-9, 'hour').format("YYYY-MM-DD HH:mm");
+    var year = moment(start).year();
+    var month = moment(start).month()+1; //1月が0のため+1する
+    var day = moment(start).date();
     var data = {
       event: {
         title: title,
@@ -34,8 +40,8 @@ $(document).ready(function() {
       success: function() {
         calendar.fullCalendar('refetchEvents');
       }
-    });
-    calendar.fullCalendar('unselect');
+    })
+      // calendar.fullCalendar('unselect');
   };
   var calendar = $('#calendar').fullCalendar({
     header: {
@@ -65,7 +71,7 @@ $(document).ready(function() {
     allDaySlot: false,                     // 終日スロットを非表示
     weekNumbers: false,                    // 週数を表示
     selectHelper: true,
-    businessHours: true,
+    // businessHours: true,                   // 土日色
     minTime: "00:00:00",                   // スケジュールの開始時間
     maxTime: "24:00:00",                   // スケジュールの最終時間
     allDayText:'allday',                   // 終日スロットのタイトル
@@ -76,95 +82,5 @@ $(document).ready(function() {
     slotDuration: '00:30:00',              // 表示する時間軸の細かさ
     snapDuration: '00:15:00',              // スケジュールをスナップするときの動かせる細かさ
     defaultTimedEventDuration: '10:00:00', // 画面上に表示する初めの時間(スクロールされている場所)
-
-    eventClick: function(event) { //イベントをクリックしたときに実行
-      var id = event.id
-      var show_url = "/events/"+id
-      location.href = show_url;
-    },
-    eventResize: function(event) { //イベントをサイズ変更した際に実行
-      var id = event.id
-      var update_url = "/events/"+id
-      var event_start_time = event._start._d
-      var year = event_start_time.getYear() + 1900;
-      var month = event_start_time.getMonth() + 1;
-      var day   = event_start_time.getDate();
-      var hour  = ( event_start_time.getHours()   < 10 ) ? '0' + event_start_time.getHours()   : event_start_time.getHours();
-      var min   = ( event_start_time.getMinutes() < 10 ) ? '0' + event_start_time.getMinutes() : event_start_time.getMinutes();
-      var moment_start = year+"-"+month+"-"+day+" "+hour+":"+min;
-      var start_time = moment(moment_start).add(-9, 'hour').format("YYYY-MM-DD HH:mm");
-      var event_end_time = event._end._d
-      var year = event_end_time.getYear() + 1900;
-      var month = event_end_time.getMonth() + 1;
-      var day   = event_end_time.getDate();
-      var hour  = ( event_end_time.getHours()   < 10 ) ? '0' + event_end_time.getHours()   : event_end_time.getHours();
-      var min   = ( event_end_time.getMinutes() < 10 ) ? '0' + event_end_time.getMinutes() : event_end_time.getMinutes();
-      var moment_end = year+"-"+month+"-"+day+" "+hour+":"+min;
-      var end_time = moment(moment_end).add(-9, 'hour').format("YYYY-MM-DD HH:mm");
-      var data = {
-        event: {
-          title: event.title,
-          start: start_time,
-          end: end_time,
-          allday: false
-        }
-      }
-      $.ajax({
-        type: "PATCH",
-        url: update_url,
-        data: data,
-        success: function() {
-          calendar.fullCalendar('refetchEvents');
-        }
-      });
-        calendar.fullCalendar('unselect');
-    },
-    eventDrop: function(event) { //イベントをドラッグ&ドロップした際に実行
-      var id = event.id
-      var update_url = "/events/"+id
-      var event_start_time = event._start._d
-      var year = event_start_time.getYear() + 1900;
-      var month = event_start_time.getMonth() + 1;
-      var day   = event_start_time.getDate();
-      var hour  = ( event_start_time.getHours()   < 10 ) ? '0' + event_start_time.getHours()   : event_start_time.getHours();
-      var min   = ( event_start_time.getMinutes() < 10 ) ? '0' + event_start_time.getMinutes() : event_start_time.getMinutes();
-      var moment_start = year+"-"+month+"-"+day+" "+hour+":"+min;
-      var start_time = moment(moment_start).add(-9, 'hour').format("YYYY-MM-DD HH:mm");
-      var event_end_time = event._end._d
-      var year = event_end_time.getYear() + 1900;
-      var month = event_end_time.getMonth() + 1;
-      var day   = event_end_time.getDate();
-      var hour  = ( event_end_time.getHours()   < 10 ) ? '0' + event_end_time.getHours()   : event_end_time.getHours();
-      var min   = ( event_end_time.getMinutes() < 10 ) ? '0' + event_end_time.getMinutes() : event_end_time.getMinutes();
-      var moment_end = year+"-"+month+"-"+day+" "+hour+":"+min;
-      var end_time = moment(moment_end).add(-9, 'hour').format("YYYY-MM-DD HH:mm");
-      var data = {
-        event: {
-          title: event.title,
-          start: start_time,
-          end: end_time,
-          allday: false
-        }
-      }
-      $.ajax({
-        type: "PATCH",
-        url: update_url,
-        data: data,
-        success: function() {
-          calendar.fullCalendar('refetchEvents');
-        }
-      });
-      calendar.fullCalendar('unselect');
-    },
-    eventRender: function (event, element) {
-      element.attr('href', 'javascript:void(0);');
-      element.click(function() {
-        $("#startTime").html(moment(event.start).format('MMM Do h:mm A'));
-        $("#endTime").html(moment(event.end).format('MMM Do h:mm A'));
-        $("#eventInfo").html(event.description);
-        $("#eventLink").attr('href', event.url);
-        $("#eventContent").dialog({ modal: true, title: event.title, width:350});
-      });
-    }
   });
 });
