@@ -8,6 +8,8 @@
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     %script{:src => "https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
+    %link{href: "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css", :rel => "stylesheet"}
+
   %body
     = render 'layouts/notifications'
     = yield

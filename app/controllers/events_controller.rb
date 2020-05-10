@@ -19,21 +19,21 @@ class EventsController < ApplicationController
   def new
     @events = Event.new(event_params)
     # binding.pry
-    render plain: render_to_string(partial: 'form_new', layout: false, locals: {event: @events})
+    # render plain: render_to_string(partial: 'form_new', layout: false, locals: {event: @events})
   end
 
   def create
     Event.create(event_params)
     # render plain: render_to_string(partial: 'form_new', layout: falsecals: { event: @events })
-    # if @events.save!
-    #   respond_to do |format|
-    #     format.html { redirect_to @events, notice: 'Event was successfully created.' }
-    #     format.json { render :show, status: :created, location: @events }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @events.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    if @events.save!
+      respond_to do |format|
+        format.html { redirect_to @events, notice: 'Event was successfully created.' }
+        format.json { render :show, status: :created, location: @events }
+      else
+        format.html { render :new }
+        format.json { render json: @events.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def show

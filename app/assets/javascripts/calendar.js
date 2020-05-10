@@ -1,6 +1,5 @@
 $(document).ready(function() {
   var select = function(start, end) {
-    var title = window.prompt("title");
     start_time = start.unix()
     var d = new Date( start_time * 1000 );
     var year = d.getYear() + 1900;
@@ -30,7 +29,7 @@ $(document).ready(function() {
         title: title,
         start: start_time,
         end: end_time,
-        allday: false
+        allDay: false
       }
     }
     $.ajax({
@@ -39,6 +38,7 @@ $(document).ready(function() {
       data: data,
       success: function() {
         calendar.fullCalendar('refetchEvents');
+        alert("予定を登録しました。")
       }
     })
       // calendar.fullCalendar('unselect');
@@ -53,6 +53,7 @@ $(document).ready(function() {
       prev: "<",
       next: ">"
     },
+    // plugins: ['bootstrap'],
     axisFormat: 'H:mm',
     timeFormat: 'H:mm',
     select: select,
@@ -82,5 +83,30 @@ $(document).ready(function() {
     slotDuration: '00:30:00',              // 表示する時間軸の細かさ
     snapDuration: '00:15:00',              // スケジュールをスナップするときの動かせる細かさ
     defaultTimedEventDuration: '10:00:00', // 画面上に表示する初めの時間(スクロールされている場所)
+
+    select: function(start, end, allDay) {
+      endtime = $.fullCalendar.formatDate(end,'h:mm tt');
+      starttime = $.fullCalendar.formatDate(start,'ddd, MMM d, h:mm tt');
+      var mywhen = starttime + ' - ' + endtime;
+      $('#createEventModal #apptStartTime').val(start);
+      $('#createEventModal #apptEndTime').val(end);
+      $('#createEventModal #apptAllDay').val(allDay);
+      $('#createEventModal #when').text(mywhen);
+      $('#createEventModal').modal('show');
+    },
   });
 });
+
+function doSubmit(){
+  alert("form submitted");
+  $("#createEventModal").modal('hide');
+
+  $("#calendar").fullCalendar('renderEvent',
+  {
+    title: $('#patientName').val(),
+    start: new Date($('#apptStartTime').val()),
+    end: new Date($('#apptEndTime').val()),
+    allDay: ($('#apptAllDay').val() == "true"),
+  },
+  true);
+}
