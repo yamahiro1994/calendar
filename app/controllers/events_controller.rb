@@ -6,8 +6,10 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all.includes(:user)
-    # @user = User.find(current_user.id)
-    # @events = Event.where(user_id: current_user.id)
+    @user = User.find(current_user.id)
+    @events = Event.where(user_id: current_user.id)
+    @event = Event.new
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,23 +19,23 @@ class EventsController < ApplicationController
   end
 
   def new
-    @events = Event.new(event_params)
-    # binding.pry
-    # render plain: render_to_string(partial: 'form_new', layout: false, locals: {event: @events})
   end
 
   def create
-    Event.create(event_params)
-    # render plain: render_to_string(partial: 'form_new', layout: falsecals: { event: @events })
-    if @events.save!
-      respond_to do |format|
-        format.html { redirect_to @events, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @events }
-      else
-        format.html { render :new }
-        format.json { render json: @events.errors, status: :unprocessable_entity }
-      end
+    @event = Event.create(event_params)
+    if @event.save!
+      redirect_to root_path
+    else
     end
+    # if @event.save
+    #   respond_to do |format|
+    #     format.html { redirect_to @event, notice: 'Event was successfully created.' }
+    #     format.json { render :show, status: :created, location: @event }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @event.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   def show
@@ -78,6 +80,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :start, :end, :color, :allday, :user_id)
+    params.require(:event).permit(:title, :start, :end, :color, :allday).merge(user_id: current_user.id)
   end
 end

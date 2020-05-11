@@ -5,19 +5,19 @@
 #createEventModal.modal.hide{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel1", :role => "dialog", :tabindex => "-1"}
   .modal-header
   %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} X
-  %h3#myModalLabel1 予定登録
+  .form-control 予定登録
   .modal-body
-  = form_with model: @events, url: new_event_path do |f|
-    .controls
+  = form_with model: @event do |f|
+    .form-control
       = f.label "タイトル", class: 'control-label', for:"inputPatient"
       = f.text_field :title, class:'#patientName', required: true
-    .form-group
+    .form-control
       = f.label "開始"
-      = f.datetime_select :start_time, class:'form-control bootstrap-date mb-3'
-    .form-group
+      = f.datetime_field :start, class:'form-control bootstrap-date'
+    .form-control
       = f.label "終了"
-      = f.datetime_select :end_time, class:'form-control bootstrap-date mb-3'
+      = f.datetime_field :end, class:'form-control bootstrap-date'
     .modal-footer
       = link_to "/", class: "btn" do
         = "もどる"
-      = f.submit "登録", class: "#submitButton.btn.btn-primary"
+      = f.submit "登録", class: "btn-primary"
