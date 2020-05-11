@@ -12,11 +12,17 @@
       = f.label "タイトル", class: 'control-label', for:"inputPatient"
       = f.text_field :title, class:'#patientName', required: true
     .form-control
-      = f.label "開始"
-      = f.datetime_field :start, class:'form-control bootstrap-date'
+      = f.label "開始日時"
+      = f.datetime_select :start, class:'form-control bootstrap-date'
     .form-control
-      = f.label "終了"
-      = f.datetime_field :end, class:'form-control bootstrap-date'
+      = f.label "終了日時"
+      = f.datetime_select :end, class:'form-control bootstrap-date'
+    .form-control
+      = f.label "色別"
+      = f.select :color, [['Blue'],['Red'],['Yellow'],['Green'],['Purple']], prompt: "Light Blue"
+    .form-control
+      = f.label "終日予定"
+      = f.check_box :allday
     .modal-footer
       = link_to "/", class: "btn" do
         = "もどる"

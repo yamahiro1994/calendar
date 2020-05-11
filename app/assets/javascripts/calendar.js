@@ -97,16 +97,16 @@ $(document).ready(function() {
   });
 });
 
-function doSubmit(){
-  alert("form submitted");
-  $("#createEventModal").modal('hide');
+// function doSubmit(){
+//   alert("form submitted");
+//   $("#createEventModal").modal('hide');
 
-  $("#calendar").fullCalendar('renderEvent',
-  {
-    title: $('#patientName').val(),
-    start: new Date($('#apptStartTime').val()),
-    end: new Date($('#apptEndTime').val()),
-    allDay: ($('#apptAllDay').val() == "true"),
-  },
-  true);
-}
+//   $("#calendar").fullCalendar('renderEvent',
+//   {
+//     title: $('#patientName').val(),
+//     start: new Date($('#apptStartTime').val()),
+//     end: new Date($('#apptEndTime').val()),
+//     allDay: ($('#apptAllDay').val() == "true"),
+//   },
+//   true);
+// }

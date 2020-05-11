@@ -25,17 +25,10 @@ class EventsController < ApplicationController
     @event = Event.create(event_params)
     if @event.save!
       redirect_to root_path
+      # notice: '予定を登録しました'
     else
+      redirect_to root_path
     end
-    # if @event.save
-    #   respond_to do |format|
-    #     format.html { redirect_to @event, notice: 'Event was successfully created.' }
-    #     format.json { render :show, status: :created, location: @event }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @event.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   def show
