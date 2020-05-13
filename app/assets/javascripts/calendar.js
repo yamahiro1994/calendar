@@ -24,7 +24,6 @@ $(document).ready(function() {
     var year = moment(start).year();
     var month = moment(start).month()+1; //1月が0のため+1する
     var day = moment(start).date();
-    // allday =
     var data = {
       event: {
         title: title,
@@ -40,7 +39,7 @@ $(document).ready(function() {
       data: data,
       success: function() {
         calendar.fullCalendar('refetchEvents');
-        alert("予定を登録しました。")
+        alert("予定を登録しました")
       }
     })
       calendar.fullCalendar('unselect');
@@ -99,13 +98,26 @@ $(document).ready(function() {
       $('#createEventModal #when').text(mywhen);
       $('#createEventModal').modal('show');
     },
+    eventClick: function(item, jsEvent, view) {
+      //クリックしたイベントのタイトルが取れるよ
+      alert('Clicked on: ' + item.title);
+    },
+    eventDrop: function(item, delta,revertFunc,jsEvent,ui, view) {
+      //ドロップした情報
+      alert('Clicked on: ' + item.title);
+      //ドロップしたことを元に戻したいとき
+      revertFunc();
+    }
   });
 });
 //modal以外クリックで閉じる
-// $('#calendar').click(function(event){
-//   console.log('ok')
-//   var clickedElement = $(event.target);
-//   if($(clickedElement).hasClass('.modal-backdrop.in')){
-//     $('.body').fadeOut(500);
-//   }
-// });
+$('#calendar').click(function(event){
+  var clickedElement = $(event.target);
+  if($(clickedElement).hasClass('.modal-backdrop.in')){
+    $('.body').fadeOut(500);
+  }
+});
+
+$('#calendar').fullCalendar( 'removeEvents' );
+$('#calendar').fullCalendar( 'addEventSource',"イベントのデータをここに入れる" );
+$('#calendar').fullCalendar( 'rerenderEvents' );
