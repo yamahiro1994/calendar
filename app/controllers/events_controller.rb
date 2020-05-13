@@ -6,8 +6,9 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all.includes(:user)
-    # @user = User.find(current_user.id)
-    # @events = Event.where(user_id: current_user.id)
+    @user = User.find(current_user.id)
+    @events = Event.where(user_id: current_user.id)
+    @event = Event.new
 
 
     respond_to do |format|
@@ -17,16 +18,16 @@ class EventsController < ApplicationController
     end
   end
 
+  def new
+  end
+
   def create
-    @events = Event.new(event_params)
-    if @events.save!
-      respond_to do |format|
-        format.html { redirect_to @events, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @events }
-      else
-        format.html { render :new }
-        format.json { render json: @events.errors, status: :unprocessable_entity }
-      end
+    @event = Event.create(event_params)
+    if @event.save!
+      redirect_to root_path
+      # notice: '予定を登録しました'
+    else
+      redirect_to root_path
     end
   end
 
@@ -67,11 +68,11 @@ class EventsController < ApplicationController
 
   private
 
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    def event_params
-      params.require(:event).permit(:title, :start, :end, :color, :allday, :user_id)
-    end
+  def event_params
+    params.require(:event).permit(:title, :start, :end, :color, :allday, :memo).merge(user_id: current_user.id)
+  end
 end

@@ -812,8 +812,9 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 --------------------------------------------------------------------------------------------------*/
 .fc-toolbar {
   /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
 }
 
 .fc-toolbar.fc-header-toolbar {
@@ -827,6 +828,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 /* inner content */
 .fc-toolbar > * > :not(:first-child) {
   margin-left: 0.75em;
+  border-color: #ddd;
 }
 
 .fc-toolbar h2 {
