@@ -77,14 +77,14 @@ Docs & License: https://fullcalendar.io/
     BootstrapTheme.prototype.iconOverrideOption = 'bootstrapFontAwesome';
     BootstrapTheme.prototype.iconOverrideCustomButtonOption = 'bootstrapFontAwesome';
     BootstrapTheme.prototype.iconOverridePrefix = 'fa-';
-    var main = core.createPlugin({
-        themeClasses: {
-            bootstrap: BootstrapTheme
-        }
-    });
+    // var main = core.createPlugin({
+    //     themeClasses: {
+    //         bootstrap: BootstrapTheme
+    //     }
+    // });
 
-    exports.BootstrapTheme = BootstrapTheme;
-    exports.default = main;
+    // exports.BootstrapTheme = BootstrapTheme;
+    // exports.default = main;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
