@@ -22,8 +22,8 @@
         = f.label "色"
         .br
         = f.select :color, [['Red'],['Pink'],['Orange'],['Yellow'],['Gray'],['LightGreen'],['BlueViolet']], prompt: "Blue", class: 'palette'
-      .body__header__allday
-        = f.label "終日"
+      -# .body__header__allday
+      -#   = f.label "終日"
         = f.check_box :allday, class: 'check'
       .body__header__memo
         = f.label "メモ"

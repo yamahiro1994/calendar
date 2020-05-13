@@ -101,10 +101,11 @@ $(document).ready(function() {
     },
   });
 });
-
-$('.modal-backdrop.in').click(function(event){
-  var clickedElement = $(event.target);
-  if($(clickedElement).hasClass('.modal-backdrop.in')){
-      $('.modal-open').fadeOut(500);
-  }
-});
+//modal以外クリックで閉じる
+// $('#calendar').click(function(event){
+//   console.log('ok')
+//   var clickedElement = $(event.target);
+//   if($(clickedElement).hasClass('.modal-backdrop.in')){
+//     $('.body').fadeOut(500);
+//   }
+// });
