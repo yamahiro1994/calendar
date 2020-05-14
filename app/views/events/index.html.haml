@@ -5,6 +5,8 @@
   .collapse.navbar-collapse
     %ul.navbar-nav
       %li.nav-item
+        = link_to "マイページ", "#", class: "nav-link"
+      %li.nav-item
         = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link"
 
 
@@ -40,3 +42,19 @@
       .body__header__footer
         = f.submit "登録する", class: "add-btn"
         .re-btn{"data-dismiss" => "modal"} もどる
+
+/ Footer
+%footer.page-footer.font-small.special-color-dark.pt-4
+  .container
+    .row
+      .col-md-6.mb-4
+        %form.form-inline
+          %input.form-control.form-control-sm.mr-3.w-75{"aria-label" => "Search", :placeholder => "予定検索", :type => "text"}/
+          %i.fas.fa-search{"aria-hidden" => "true"}
+      .col-md-6.mb-4
+        %form.input-group
+          %input.form-control.form-control-sm{"aria-describedby" => "basic-addon2", "aria-label" => "Your email", :placeholder => "お問い合わせ", :type => "text"}/
+          .input-group-append
+            %button.btn.btn-sm.btn-outline-white.my-0{:type => "button"} 送信
+  .footer-copyright.text-center.py-3
+    © 2020 MyCalendar : herokuapp.com
