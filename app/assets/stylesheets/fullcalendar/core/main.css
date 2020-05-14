@@ -818,7 +818,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 }
 
 .fc-toolbar.fc-header-toolbar {
-  margin-bottom: 1.5em;
+  margin: 1.5em 0;     /* bottom削除 + 0追加 */
 }
 
 .fc-toolbar.fc-footer-toolbar {

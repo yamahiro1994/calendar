@@ -1,16 +1,11 @@
 .wrapper
-  .form-wrapper
-    %h1 WIP
+  .pass-wrapper
+    %h1 パスワード再設定
     = form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :post}) do |f|
       = render "devise/shared/error_messages", resource: resource
       .field
-        -# = f.email_field :email, autofocus: true, autocomplete: "username", placeholder: "メールアドレス", class: "email"
-      .fieldn
-      - if @minimum_password_length
-        %em
-          (#{@minimum_password_length} characters minimum)
-        = f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class: "input_pass"
+        = f.email_field :email, autofocus: true, autocomplete: "username", placeholder: "メールアドレスを入力してください", class: "email"
       .actions
-        -# = f.submit "登録する", class: "btn"
+        = f.submit "メールを送信する", class: "btn"
     .form-footer
       = render "devise/shared/links"

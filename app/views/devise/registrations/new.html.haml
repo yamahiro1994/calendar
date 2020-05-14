@@ -5,7 +5,9 @@
       = render "devise/shared/error_messages", resource: resource
       .field
         = f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "名前", class: "input_name"
-      .fieldn
+      .field
+        = f.email_field :email, type: "email", placeholder: "メールアドレス", autocomplete: "email", class: "email_form", required: true
+      .field
       - if @minimum_password_length
         %em
           (#{@minimum_password_length} characters minimum)

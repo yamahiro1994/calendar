@@ -59,6 +59,23 @@ input#user_username:focus {
   outline: none;
 }
 
+input#user_email{
+  background: #fff;
+  border: none;
+  border-bottom: 2px solid #e9e9e9;
+  color: #666;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  height: 50px;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+input#user_email:focus{
+  border-bottom: 2px solid #c0c0c0;
+  outline: none;
+}
+
 input#user_password {
   background: #fff;
   border: none;
