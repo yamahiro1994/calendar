@@ -62,7 +62,7 @@ $(document).ready(function() {
     firstDay: 0,                           // 0:日曜日から表示
     firstHour: 9,
     navLinks: true,
-    editable: true,                        // イベントのドラッグが可能
+    editable: true,                        // イベントの編集可能
     weekends: true,                        // 土曜、日曜を表示
     aditable: true,                        //trueでスケジュールを編集可能にする
     slotMinutes: 15,                       // スロットの分
@@ -80,7 +80,7 @@ $(document).ready(function() {
     maxTime: "24:00:00",                   // スケジュールの最終時間
     allDayText:'allday',                   // 終日スロットのタイトル
     defaultView: 'month',
-    ignoreTimezone: true,
+    ignoreTimezone: false,
     timeZone: 'Asia/Tokyo',
     events: '/events.json',
     slotDuration: '00:30:00',              // 表示する時間軸の細かさ
