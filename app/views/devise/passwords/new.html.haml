@@ -4,7 +4,7 @@
     = form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :post}) do |f|
       = render "devise/shared/error_messages", resource: resource
       .field
-        = f.email_field :email, autofocus: true, autocomplete: "username", placeholder: "メールアドレスを入力してください", class: "email"
+        = f.email_field :email, autofocus: true, autocomplete: "username", placeholder: "メールアドレスを入力してください", class: "mail"
       .actions
         = f.submit "メールを送信する", class: "btn"
     .form-footer
