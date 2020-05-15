@@ -5,6 +5,7 @@
         %span.fontawesome-lock
         認証
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        = render "devise/shared/error_messages", resource: resource
         %fieldset
           %p
             %label{for: "username"} 名前
