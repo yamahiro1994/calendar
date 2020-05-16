@@ -3,21 +3,21 @@
     #login
       .h22
         %span.fontawesome-lock
-        認証
+        ユーザー認証
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         = render "devise/shared/error_messages", resource: resource
         %fieldset
           %p
-            %label{for: "username"} 名前
+            %label{for: "username"} お名前
           %p
           .field
             = f.text_field :username, autocomplete: "name", class: "input_name", required: false
           %p
-            %label{for: "password"} パスワード
+            %label{for: "password"} パスワード（半角６文字以上）
           %p
           .field
             = f.password_field :password, autocomplete: "current-password", class: "input_password", required: false
           %p
-          = f.submit "ログイン", class: 'login_btn'
+          = f.submit "接続する", class: 'login_btn'
         .footer
           = render "devise/shared/links"

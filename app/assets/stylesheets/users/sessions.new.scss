@@ -1,14 +1,3 @@
-$color: #000;
-$color-bg: #c0c0c0;
-
-/* ---------- FONTAWESOME ---------- */
-
-[class*="fontawesome-"]:before {
-  font-family: 'FontAwesome', sans-serif;
-}
-
-/* ---------- GENERAL ---------- */
-
 body {
   font-family: 'Varela Round', sans-serif;
   line-height: 1.5;
@@ -28,7 +17,7 @@ input {
 /* ---------- ALIGN ---------- */
 
 .align {
-  background-color: $color-bg;
+  background-color: #e9e9e9;
   align-items: center;
   display: flex;
   flex-direction: column;

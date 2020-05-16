@@ -1,5 +1,5 @@
 class AddColumnUsersIndex < ActiveRecord::Migration[5.2]
-  def up
+  def change
     add_index    :users, :email, unique: true
   end
 

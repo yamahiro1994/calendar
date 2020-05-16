@@ -11,9 +11,8 @@
       - if @minimum_password_length
         %em
           (#{@minimum_password_length} characters minimum)
-        = f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class: "input_pass"
+        = f.password_field :password, autocomplete: "new-password", placeholder: "パスワード（半角６文字以上）", class: "input_pass"
       .actions
         = f.submit "登録する", class: "btn"
     .form-footer
       = render "devise/shared/links"
-      %a{href: "/users/password/new"} Forgot your password?
