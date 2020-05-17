@@ -10,7 +10,7 @@ https://mycalendar-app.herokuapp.com/
 * パスワード：111111
 
 ### 開発環境
-* haml＆Sass
+* Haml＆Sass
 * JavaScript
 * jQuery
 * Ruby
@@ -46,12 +46,12 @@ gem file 『devise』を導入し名前、メールアドレス、パスワー�
 <br>
 ## パスワード再設定
 ![re-pass - Calendar - mycalendar-app herokuapp com](https://user-images.githubusercontent.com/61701275/82155144-b0ba8780-98ad-11ea-825e-71fa7225debd.png)
-ネットを利用したことがない方でも分かるように、極力英語ではなく日本語を使用しました。
+ネットを利用したことがない方でも分かるように英語ではなく、できるだけ日本語を使用するようにしました。
 <br>
 <br>
 ## カレンダー（月表示）
 ![top-png - Calendar - mycalendar-app herokuapp com](https://user-images.githubusercontent.com/61701275/82154781-3852c700-98ab-11ea-8352-e8f973c0a453.png)
-月表示がメインページとなります。gem file「fullcalendar」を導入しカレンダーを表示しました。<br>土日やイベントに色をつけたことで視覚的に分かりやすくしています。
+月表示がメインページとなります。gem file「fullcalendar」を導入しfullcalendar-4.4.0のライブラリーを使用してカレンダーを表示しました。<br>土日やイベントに色をつけたことで視覚的に分かりやすくしています。
 <br>
 <br>
 ## カレンダー（週表示）
