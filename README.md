@@ -8,8 +8,7 @@ https://mycalendar-app.herokuapp.com/
 ### テストユーザー
 * 名前：aaa
 * パスワード：111111
-<br>
-<br>
+
 ### 開発環境
 * haml＆Sass
 * JavaScript
@@ -19,15 +18,13 @@ https://mycalendar-app.herokuapp.com/
 * MySQL
 * PostgreSQL
 * Heroku
-<br>
-<br>
+
 # 企画背景
 今後日本は高齢化によって、要介護者が増える一方、介護施設や介護士が不足し、施設に入所できない『介護難民』が増加していく。
 そのため高齢者の独居世帯が増えていくことが予測され、今後は看護や介護の支援を受けながら自宅で生活をしていくことが求められる。
 高齢者の生活をサポートできるアプリが必要だと考えたことが制作した経緯になります。
 毎日の予定を管理して音声で通知することで、物忘れ防止などのサポートが可能なアプリを製作中です。
-<br>
-<br>
+
 ## このアプリで出来ること
 * ユーザー登録
 * ログイン&ログアウト
@@ -36,8 +33,7 @@ https://mycalendar-app.herokuapp.com/
 * 月・週・日・予定リストで表示を変更
 * イベント追加・保存
 * イベントを選択した色で表示
-<br>
-<br>
+
 ## ユーザー登録
 ![sign in - Calendar - mycalendar-app herokuapp com](https://user-images.githubusercontent.com/61701275/82155131-908ac880-98ad-11ea-8b7d-d826d3c227c3.png)
 gem file 『devise』を導入し名前、メールアドレス、パスワードでユーザー登録を可能にしました。
@@ -88,7 +84,7 @@ gem file 『devise』を導入し名前、メールアドレス、パスワー�
 * イベント検索
 * 問い合わせ
 <br>
-<br>
+
 ## データベース設計
 ### usersテーブル
 |Column|Type|Options|
