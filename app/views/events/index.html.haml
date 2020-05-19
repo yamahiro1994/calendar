@@ -1,60 +1,66 @@
-%nav.navbar.navbar-expand-sm.navbar-dark.bg-dark.mb-3
-  %button.navbar-toggler{"aria-controls" => "navbarNav4", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNav4", "data-toggle" => "collapse", :type => "button"}
-    %span.navbar-toggler-icon
-  %a.navbar-brand{:href => "#"} ビデオ通話
-  .collapse.navbar-collapse
-    %ul.navbar-nav
-      %li.nav-item
-        = link_to "マイページ", "#", class: "nav-link"
-      %li.nav-item
-        = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link"
-
-
+= render "header"
 #calendar
 
-#createEventModal.modal.hide{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel1", :role => "dialog", :tabindex => "-1"}
-  .body
-    .body__header
+#createEventModal.modal.hide
+  #body
+    #body__header
       %h2 新規予定登録
     = form_with model: @event do |f|
-      .body__header__title
+      #body__header__title
         = f.label "タイトル"
         = f.text_field :title, class:'event-name', required: true
-      .body__header__sta-date
+      #body__header__memo
+        = f.label "メモ"
+        .br
+        = f.text_area :memo, class: 'text'
+      #body__header__sta-date
         = f.label "開始日時"
         .br
         = f.datetime_select :start, class:'sta'
-      .body__header__end-date
+      #body__header__end-date
         = f.label "終了日時"
         .br
         = f.datetime_select :end, class:'end'
-      .body__header__color
+      #body__header__color
+        = f.label "色"
+        .br
+        = f.select :color, [['Red'],['Pink'],['Orange'],['Gray'],['LightGreen'],['BlueViolet']], prompt: "Blue", class: 'palette'
+      -# .body__header__allday
+      -#   = f.label "終日"
+        -# = f.check_box :allday, class: 'check'
+      #body__header__footer
+        = f.submit "登録する", class: "add-btn"
+        .re-btn{"data-dismiss" => "modal"} もどる
+
+#showEventModal.modal.hide{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel1", :role => "dialog", :tabindex => "-1"}
+  .event-body
+    .event-body__header
+      %h2 予定編集
+    = form_with model: @event do |f|
+      .event-body__header__title
+        = f.label "タイトル"
+        = f.text_field :title, class:'event-name', required: true
+      .event-body__header__memo
+        = f.label "メモ"
+        .br
+        = f.text_area :memo, class: 'text'
+      .event-body__header__sta-date
+        = f.label "開始日時"
+        .br
+        = f.datetime_select :start, class:'sta'
+      .event-body__header__end-date
+        = f.label "終了日時"
+        .br
+        = f.datetime_select :end, class:'end'
+      .event-body__header__color
         = f.label "色"
         .br
         = f.select :color, [['Red'],['Pink'],['Orange'],['Yellow'],['Gray'],['LightGreen'],['BlueViolet']], prompt: "Blue", class: 'palette'
       -# .body__header__allday
       -#   = f.label "終日"
-        = f.check_box :allday, class: 'check'
-      .body__header__memo
-        = f.label "メモ"
-        .br
-        = f.text_area :memo, class: 'text'
-      .body__header__footer
-        = f.submit "登録する", class: "add-btn"
+        -# = f.check_box :allday, class: 'check'
+      .event-body__header__footer
+        = f.submit "変更する", class: "add-btn"
+        -# = link_to '削除', event_path, method: :delete, class:'show-destroy', data: { confirm: "予定を削除してもよろしいですか？" }
         .re-btn{"data-dismiss" => "modal"} もどる
-
-/ Footer
-%footer.page-footer.font-small.special-color-dark.pt-4
-  .container
-    .row
-      .col-md-6.mb-4
-        %form.form-inline
-          %input.form-control.form-control-sm.mr-3.w-75{"aria-label" => "Search", :placeholder => "予定検索", :type => "text"}/
-          %i.fas.fa-search{"aria-hidden" => "true"}
-      .col-md-6.mb-4
-        %form.input-group
-          %input.form-control.form-control-sm{"aria-describedby" => "basic-addon2", "aria-label" => "Your email", :placeholder => "お問い合わせ", :type => "text"}/
-          .input-group-append
-            %button.btn.btn-sm.btn-outline-white.my-0{:type => "button"} 送信
-  .footer-copyright.text-center.py-3
-    © 2020 MyCalendar : herokuapp.com
+= render "footer"

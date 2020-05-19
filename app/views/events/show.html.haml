@@ -1,34 +1,34 @@
-.header
-  = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header__out-btn"
-#calendar
+-# = render "header"
+-# #calendar
 
-#createEventModal.modal.hide{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel1", :role => "dialog", :tabindex => "-1"}
-  .body
-    .body__header
-      %h2 予定編集
-    = form_with model: @event do |f|
-      .body__header__title
-        = f.label "タイトル"
-        = f.text_field :title, class:'event-name', required: true
-      .body__header__sta-date
-        = f.label "開始日時"
-        .br
-        = f.datetime_select :start, class:'sta'
-      .body__header__end-date
-        = f.label "終了日時"
-        .br
-        = f.datetime_select :end, class:'end'
-      .body__header__color
-        = f.label "色"
-        .br
-        = f.select :color, [['Red'],['Pink'],['Orange'],['Yellow'],['Gray'],['LightGreen'],['BlueViolet']], prompt: "Blue", class: 'palette'
-      -# .body__header__allday
-      -#   = f.label "終日"
-        = f.check_box :allday, class: 'check'
-      .body__header__memo
-        = f.label "メモ"
-        .br
-        = f.text_area :memo, class: 'text'
-      .body__header__footer
-        = f.submit "登録する", class: "add-btn"
-        .re-btn{"data-dismiss" => "modal"} もどる
+-# #showEventModal.modal.hide{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel1", :role => "dialog", :tabindex => "-1"}
+-#   .event-body
+-#     .event-body__header
+-#       %h2 予定編集
+-#     = form_with model: @event do |f|
+-#       .event-body__header__title
+-#         = f.label "タイトル"
+-#         = f.text_field :title, class:'event-name', required: true
+-#       .event-body__header__memo
+-#         = f.label "メモ"
+-#         .br
+-#         = f.text_area :memo, class: 'text'
+-#       .event-body__header__sta-date
+-#         = f.label "開始日時"
+-#         .br
+-#         = f.datetime_select :start, class:'sta'
+-#       .event-body__header__end-date
+-#         = f.label "終了日時"
+-#         .br
+-#         = f.datetime_select :end, class:'end'
+-#       .event-body__header__color
+-#         = f.label "色"
+-#         .br
+-#         = f.select :color, [['Red'],['Pink'],['Orange'],['Yellow'],['Gray'],['LightGreen'],['BlueViolet']], prompt: "Blue", class: 'palette'
+-#       -# .body__header__allday
+-#       -#   = f.label "終日"
+-#         -# = f.check_box :allday, class: 'check'
+-#       .event-body__header__footer
+-#         = f.submit "変更する", class: "add-btn"
+-#         .re-btn{"data-dismiss" => "modal"} もどる
+-# = render "footer"
