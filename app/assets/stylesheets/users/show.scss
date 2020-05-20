@@ -3,10 +3,11 @@
 }
 
 #showEventModal.modal.hide{
-  max-width: 40%;
   position: absolute;
-  top: 8%;
+  position: fixed;
+  max-width: 40%;
   left: 30%;
+  top: 8%;
 }
 
 .event-body{

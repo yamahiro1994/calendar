@@ -1,12 +1,10 @@
 $(document).ready(function() {
   var select = function(start, end) {
-    start_time = start.unix()
-    end_time = end.unix()
     var data = {
       event: {
         title: title,
-        start: start_time,
-        end: end_time,
+        start: start,
+        end: end,
         memo: memo
       }
     }
@@ -39,7 +37,6 @@ $(document).ready(function() {
     height: 800,
     firstDay: 0,                           // 0:日曜日から表示
     firstHour: 9,
-    locale: 'ja',
     navLinks: true,
     editable: true,                        // イベントの編集可能
     weekends: true,                        // 土曜、日曜を表示
@@ -61,6 +58,9 @@ $(document).ready(function() {
     // selectMinDistance: 1,                  // クリックとドラッグの判別
     defaultView: 'month',
     ignoreTimezone: false,
+    Timezone: 'Asia/Tokyo',
+		// displayEventEnd: true,                // event終了時間表示
+    // displayEventTime: true,
     events: '/events.json',
     slotDuration: '00:30:00',              // 表示する時間軸の細かさ
     snapDuration: '00:15:00',              // スケジュールをスナップするときの動かせる細かさ
@@ -78,31 +78,18 @@ $(document).ready(function() {
       $('#createEventModal #when').text(mywhen);
       $('#createEventModal').modal('show');
     },
+    //編集モーダル
     eventClick: function(calEvent, jsEvent, view) {
       // カレンダーに設定したイベントクリック時のイベント
-      $('#body__header__title').html(calEvent.title); // モーダルのタイトルをセット
-      $('#body__header__memo').html(calEvent.memo); // モーダルの本文をセット
+      // $('#body__header__title').html(calEvent.title); // モーダルのタイトルをセット
+      // $('#body__header__memo').html(calEvent.memo); // モーダルの本文をセット
       $('#showEventModal').modal(); // モーダル着火
     },
-    // dayClick: function(date, jsEvent, view) {
-    //     // カレンダー空白部分クリック時のイベント
-    // },
-    // select: function(start, end) {
-    //     // カレンダー空白部分をドラッグして範囲指定した時のイベント
-    // },
-    // eventDrop: function(event, delta, revertFunc, jsEvent, ui, view) {
-    //     // イベントをドラッグして別日に移動させた時のイベント
-    // }
-    eventRender: function(eventObj, el) {
-			$(el).popover({
-				title: eventObj.title,
-				memo: eventObj.memo,
-				trigger: 'hover',
-				placement: 'top',
-				container: 'body',
-				html: true
-			});
-    }
+
+    // ドラッグ後の日付にデータ更新する
+    eventDrop: function(event, delta, revertFunc, jsEvent, ui, view) {
+      moveSchedule(event.id, event.start.format('YYYY-MM-DD'), event.end.format('YYYY-MM-DD'));
+    },
 
     // eventRender: function (event, element) {
     //   var id = event.id
@@ -114,6 +101,7 @@ $(document).ready(function() {
     // },
   });
 });
+
 
 //modal以外クリックで閉じる
 $('#calendar').click(function(event){
