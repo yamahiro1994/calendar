@@ -1,6 +1,4 @@
 = render "header"
-%button#button{"aria-describedby" => "tooltip"} I'm a button
-#tooltip{:role => "tooltip"} I'm a tooltip
 
 #calendar
 
@@ -63,8 +61,8 @@
       -#   = f.label "終日"
         -# = f.check_box :allday, class: 'check'
       .event-body__header__footer
-        = f.submit "変更する", class: "add-btn"
-        -# = link_to '削除', event_path, method: :delete, class:'show-destroy', data: { confirm: "予定を削除してもよろしいですか？" }
+        = f.submit "更新する", class: "add-btn"
+        = link_to '削除する', events_path, method: :delete, class:'remove', data: { confirm: "予定を削除してもよろしいですか？" }
         .re-btn{"data-dismiss" => "modal"} もどる
 
 = render "footer"
