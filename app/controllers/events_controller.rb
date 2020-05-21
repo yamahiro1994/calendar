@@ -9,10 +9,8 @@ class EventsController < ApplicationController
     @user = User.find(current_user.id)
     @events = Event.where(user_id: current_user.id)
     @event = Event.new
-
-
     respond_to do |format|
-      format.html # index.html.erb
+      format.html  #index.html.erb
       format.xml { render :xml => @events }
       format.json { render :json => @events }
     end
@@ -25,7 +23,7 @@ class EventsController < ApplicationController
     @event = Event.create(event_params)
     if @event.save!
       redirect_to root_path
-      # notice: '予定を登録しました'
+      flash[:alert] = '予定を登録しました'
     else
       redirect_to root_path
     end
@@ -33,7 +31,12 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    render json: @event.to_json
+    # render json: @event.to_json
+    respond_to do |format|
+      format.html  #index.html.erb
+      format.xml { render :xml => @events }
+      format.json { render :json => @events }
+    end
   end
 
   def edit
@@ -42,11 +45,11 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    event_params.require(:title)
-    event_params.require(:start)
-    event_params.require(:end)
+    # event_params.require(:title)
+    # event_params.require(:start)
+    # event_params.require(:end)
     # event_params.require(:color)
-    # event_params.require(:allday)
+    # # event_params.require(:allday)
     respond_to do |format|
       format.any
       if @event.update!(event_params)
@@ -69,7 +72,7 @@ class EventsController < ApplicationController
   private
 
   def set_event
-    @event = Event.find(params[:id])
+    # @event = Event.find(params[:id])
   end
 
   def event_params

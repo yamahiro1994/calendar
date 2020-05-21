@@ -72,6 +72,7 @@ gem 'jquery-ui-rails'
 gem 'momentjs-rails'
 gem 'font-awesome-sass'
 gem 'fullcalendar-rails'
+gem 'webpacker', github: 'rails/webpacker'
 
 group :production do
   gem 'pg'

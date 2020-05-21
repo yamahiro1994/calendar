@@ -1,0 +1,10 @@
+%nav.navbar.navbar-expand-sm.navbar-dark.bg-dark.mb-3
+  %button.navbar-toggler{"aria-controls" => "navbarNav4", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNav4", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  = link_to 'ビデオ通話', rooms_show_path, class: 'navbar-brand'
+  .collapse.navbar-collapse
+    %ul.navbar-nav
+      %li.nav-item
+        = link_to 'カレンダー', events_path, class: "nav-link"
+      %li.nav-item
+        = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link"

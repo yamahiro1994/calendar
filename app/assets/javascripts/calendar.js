@@ -1,35 +1,10 @@
 $(document).ready(function() {
-  var select = function(start, end, allday) {
-    start_time = start.unix()
-    var d = new Date( start_time * 1000 );
-    var year = d.getYear() + 1900;
-    var month = d.getMonth() + 1;
-    var day   = d.getDate();
-    var year = moment(start).year();
-    var month = moment(start).month()+1; //1月が0のため+1する
-    var day = moment(start).date();
-    var hour  = ( d.getHours()   < 10 ) ? '0' + d.getHours()   : d.getHours();
-    var min   = ( d.getMinutes() < 10 ) ? '0' + d.getMinutes() : d.getMinutes();
-    var moment_start = year+"-"+month+"-"+day+" "+hour+":"+min;
-    var start_time = moment(moment_start).add(-9, 'hour').format("YYYY-MM-DD HH:mm");
-    end_time = end.unix()
-    var d = new Date( end_time * 1000 );
-    var year = d.getYear() + 1900;
-    var month = d.getMonth() + 1;
-    var day   = d.getDate();
-    var hour  = ( d.getHours()   < 10 ) ? '0' + d.getHours()   : d.getHours();
-    var min   = ( d.getMinutes() < 10 ) ? '0' + d.getMinutes() : d.getMinutes();
-    var moment_end = year+"-"+month+"-"+day+" "+hour+":"+min;
-    var end_time = moment(moment_end).add(-9, 'hour').format("YYYY-MM-DD HH:mm");
-    var year = moment(start).year();
-    var month = moment(start).month()+1; //1月が0のため+1する
-    var day = moment(start).date();
+  var select = function(start, end) {
     var data = {
       event: {
         title: title,
-        start: start_time,
-        end: end_time,
-        allDay: allday,
+        start: start,
+        end: end,
         memo: memo
       }
     }
@@ -44,6 +19,7 @@ $(document).ready(function() {
     })
       calendar.fullCalendar('unselect');
   };
+  var initialLocaleCode = 'ja';
   var calendar = $('#calendar').fullCalendar({
     header: {
       center: 'title',
@@ -54,7 +30,7 @@ $(document).ready(function() {
       prev: "<",
       next: ">"
     },
-    plugins: ['bootstrap','timegrid', 'list'],
+    plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
     axisFormat: 'H:mm',
     timeFormat: 'H:mm',
     select: select,
@@ -73,18 +49,22 @@ $(document).ready(function() {
     eventLimit: true,
     eventLimit: true,                      // イベントが多すぎる場合は「詳細」リンクを許可する
     weekMode: 'fixed',                     // 週モード (fixed, liquid, variable)
-    allDaySlot: false,                     // 終日スロットを非表示
+    allDaySlot: true,                     // 終日スロットを非表示
     weekNumbers: false,                    // 週数を表示
     selectHelper: true,
     minTime: "00:00:00",                   // スケジュールの開始時間
     maxTime: "24:00:00",                   // スケジュールの最終時間
     allDayText:'allday',                   // 終日スロットのタイトル
+    // selectMinDistance: 1,                  // クリックとドラッグの判別
     defaultView: 'month',
     ignoreTimezone: false,
-    timeZone: 'Asia/Tokyo',
+    Timezone: 'Asia/Tokyo',
+		// displayEventEnd: true,                // event終了時間表示
+    // displayEventTime: true,
     events: '/events.json',
     slotDuration: '00:30:00',              // 表示する時間軸の細かさ
     snapDuration: '00:15:00',              // スケジュールをスナップするときの動かせる細かさ
+    locale: initialLocaleCode,
     defaultTimedEventDuration: '10:00:00', // 画面上に表示する初めの時間(スクロールされている場所)
 
     //モーダル入力フォーム表示
@@ -98,18 +78,31 @@ $(document).ready(function() {
       $('#createEventModal #when').text(mywhen);
       $('#createEventModal').modal('show');
     },
-    eventClick: function(item, jsEvent, view) {
-      //クリックしたイベントのタイトルが取れるよ
-      alert('Clicked on: ' + item.title);
+    //編集モーダル
+    eventClick: function(calEvent, jsEvent, view) {
+      // カレンダーに設定したイベントクリック時のイベント
+      // $('#body__header__title').html(calEvent.title); // モーダルのタイトルをセット
+      // $('#body__header__memo').html(calEvent.memo); // モーダルの本文をセット
+      $('#showEventModal').modal(); // モーダル着火
     },
-    eventDrop: function(item, delta,revertFunc,jsEvent,ui, view) {
-      //ドロップした情報
-      alert('Clicked on: ' + item.title);
-      //ドロップしたことを元に戻したいとき
-      revertFunc();
-    }
+
+    // ドラッグ後の日付にデータ更新する
+    eventDrop: function(event, delta, revertFunc, jsEvent, ui, view) {
+      moveSchedule(event.id, event.start.format('YYYY-MM-DD'), event.end.format('YYYY-MM-DD'));
+    },
+
+    // eventRender: function (event, element) {
+    //   var id = event.id
+    //   var show_url = "/events/"+id
+    //   element.attr('href', 'javascript:void(0);');
+    //   element.click(function() {
+    //     $("#showEventModal").modal();
+    //   });
+    // },
   });
 });
+
+
 //modal以外クリックで閉じる
 $('#calendar').click(function(event){
   var clickedElement = $(event.target);
@@ -117,7 +110,3 @@ $('#calendar').click(function(event){
     $('.body').fadeOut(500);
   }
 });
-
-$('#calendar').fullCalendar( 'removeEvents' );
-$('#calendar').fullCalendar( 'addEventSource',"イベントのデータをここに入れる" );
-$('#calendar').fullCalendar( 'rerenderEvents' );
