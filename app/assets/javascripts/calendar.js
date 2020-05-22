@@ -8,6 +8,7 @@ $(document).ready(function() {
         memo: memo
       }
     }
+
     $.ajax({
       type: "POST",
       url: "/events",
@@ -19,6 +20,7 @@ $(document).ready(function() {
     })
       calendar.fullCalendar('unselect');
   };
+
   var initialLocaleCode = 'ja';
   var calendar = $('#calendar').fullCalendar({
     header: {
@@ -83,6 +85,8 @@ $(document).ready(function() {
       // カレンダーに設定したイベントクリック時のイベント
       // $('#body__header__title').html(calEvent.title); // モーダルのタイトルをセット
       // $('#body__header__memo').html(calEvent.memo); // モーダルの本文をセット
+      $("#scheduleId").val(event.id);
+      $("#inputTitle").val(event.title);
       $('#showEventModal').modal(); // モーダル着火
     },
 
