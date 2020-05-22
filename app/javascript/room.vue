@@ -132,7 +132,7 @@ let localStream;
 <style scoped>
 
     #app{
-        margin-top: 50px;
+        margin-top: 30px;
         text-align: center;
     }
     p {
@@ -145,7 +145,7 @@ let localStream;
     video{
         border: 1px solid;
         margin: 0 auto;
-        height: 400px;
+        height: 450px;
         width: 45%;
     }
 
